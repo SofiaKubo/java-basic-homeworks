@@ -1,7 +1,37 @@
 package ru.otus.java.basic.homeworks.homework_1;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Выберите метод (1-5):");
+        int choice = scanner.nextInt();
+
+        switch (choice) {
+            case 1:
+                greetings();
+                break;
+            case 2:
+                System.out.println("Введите a, b, c:");
+                checkSign(scanner.nextInt(), scanner.nextInt(), scanner.nextInt());
+                break;
+            case 3:
+                System.out.println("Введите data:");
+                selectColor(scanner.nextInt());
+                break;
+            case 4:
+                System.out.println("Введите a, b:");
+                compareNumbers(scanner.nextInt(), scanner.nextInt());
+                break;
+            case 5:
+                System.out.println("Введите initValue, delta, increment (true/false):");
+                addOrSubtractAndPrint(scanner.nextInt(), scanner.nextInt(), scanner.nextBoolean());
+                break;
+            default:
+                System.out.println("Такого метода нет.");
+        }
+        scanner.close();
     }
 
     private static void greetings() {
@@ -17,6 +47,7 @@ public class Main {
                 sum >= 0 ? "Сумма положительная." : "Сумма отрицательная.");
     }
 
+    // Дополнительный вариант без параметров: значения заданы внутри по требованиям ДЗ.
     private static void selectColor() {
         int data = 15;
         selectColor(data);
@@ -32,6 +63,7 @@ public class Main {
         }
     }
 
+    // Дополнительный вариант без параметров: значения заданы внутри по требованиям ДЗ.
     private static void compareNumbers() {
         int a = 10;
         int b = 20;
