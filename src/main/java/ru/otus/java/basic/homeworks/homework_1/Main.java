@@ -5,8 +5,23 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Выберите метод (1-5):");
-        int choice = scanner.nextInt();
+        int choice;
+
+        while (true) {
+            System.out.print("Выберите метод (1-5): ");
+            if (!scanner.hasNextInt()) {
+                System.out.println("Ошибка: нужно ввести целое число.");
+                scanner.next();
+                continue;
+            }
+            choice = scanner.nextInt();
+
+            if (choice < 1 || choice > 5) {
+                System.out.println("Такого метода нет. Допустимы только значения от 1 до 5.");
+                continue;
+            }
+            break;
+        }
 
         switch (choice) {
             case 1:
@@ -28,8 +43,6 @@ public class Main {
                 System.out.println("Введите initValue, delta, increment (true/false):");
                 addOrSubtractAndPrint(scanner.nextInt(), scanner.nextInt(), scanner.nextBoolean());
                 break;
-            default:
-                System.out.println("Такого метода нет.");
         }
         scanner.close();
     }
