@@ -58,11 +58,11 @@ public class Main {
         }
 
         if (leftSum > rightSum) {
-            System.out.println("Сумма левой половины больше");
+            System.out.println("Сумма левой половины больше.");
         } else if (rightSum > leftSum) {
-            System.out.println("Сумма правой половины больше");
+            System.out.println("Сумма правой половины больше.");
         } else {
-            System.out.println("Суммы половин равны");
+            System.out.println("Суммы обоих половин равны.");
         }
     }
 }
