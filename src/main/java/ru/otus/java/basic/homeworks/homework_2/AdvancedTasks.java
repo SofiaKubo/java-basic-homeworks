@@ -4,9 +4,10 @@ import java.util.Arrays;
 
 public class AdvancedTasks {
     public static void main(String[] args) {
-//        testSumArrays();
-//        testBalancePoint();
-        testInSelectedDirection();
+        testSumArrays();
+        testBalancePoint();
+        testSortedInSelectedDirection();
+        testReverseArray();
     }
 
     public static int[] sumArrays(int[]... arrays) {
@@ -72,18 +73,17 @@ public class AdvancedTasks {
         int[] emptyArray = {};
         int[] nullArray = null;
 
-        System.out.println(Arrays.toString(testArrayFirst) + " -> " +
-                hasBalancePoint(testArrayFirst));
-        System.out.println(Arrays.toString(testArraySecond) + " -> " +
-                hasBalancePoint(testArraySecond));
-        System.out.println(Arrays.toString(testArrayThird) + " -> " +
-                hasBalancePoint(testArrayThird));
-        System.out.println(Arrays.toString(testArrayFourth) + " -> " +
-                hasBalancePoint(testArrayFourth));
-        System.out.println(Arrays.toString(emptyArray) + " -> " +
-                hasBalancePoint(emptyArray));
-        System.out.println(Arrays.toString(nullArray) + " -> " +
-                hasBalancePoint(nullArray));
+        printBalancePointTest(testArrayFirst);
+        printBalancePointTest(testArraySecond);
+        printBalancePointTest(testArrayThird);
+        printBalancePointTest(testArrayFourth);
+        printBalancePointTest(emptyArray);
+        printBalancePointTest(nullArray);
+    }
+
+    private static void printBalancePointTest(int[] array) {
+        System.out.println(Arrays.toString(array) + " -> " +
+                hasBalancePoint(array));
     }
 
     private static boolean isSortedInSelectedDirection(int[] array, int userChoice) {
@@ -116,26 +116,72 @@ public class AdvancedTasks {
         }
     }
 
-    private static void testInSelectedDirection() {
+    private static void testSortedInSelectedDirection() {
         int[] testArrayFirst = {1, 2, 5};
         int[] testArraySecond = {5, 3, 1, -2};
         int[] testArrayThird = {7, 12, 1};
         int[] testArrayFourth = {9};
         int[] emptyArray = {};
         int[] nullArray = null;
+        int[] equalElementsArray = {2, 2, 2};
 
-        System.out.println(Arrays.toString(testArrayFirst) + " -> " +
-                isSortedInSelectedDirection(testArrayFirst, 1));
-        System.out.println(Arrays.toString(testArraySecond) + " -> " +
-                isSortedInSelectedDirection(testArraySecond, 2));
-        System.out.println(Arrays.toString(testArrayThird) + " -> " +
-                isSortedInSelectedDirection(testArrayThird, 1));
-        System.out.println(Arrays.toString(testArrayFourth) + " -> " +
-                isSortedInSelectedDirection(testArrayFourth, 2));
-        System.out.println(Arrays.toString(emptyArray) + " -> " +
-                isSortedInSelectedDirection(emptyArray, 1));
-        System.out.println(Arrays.toString(nullArray) + " -> " +
-                isSortedInSelectedDirection(nullArray, 1));
+        printSortedDirectionTest(testArrayFirst, 1);
+        printSortedDirectionTest(testArraySecond, 2);
+        printSortedDirectionTest(testArrayThird, 1);
+        printSortedDirectionTest(testArrayFourth, 2);
+        printSortedDirectionTest(emptyArray, 1);
+        printSortedDirectionTest(nullArray, 1);
+        printSortedDirectionTest(equalElementsArray, 1);
+        printSortedDirectionTest(equalElementsArray, 2);
+        printSortedDirectionTest(testArrayFirst, 3);
+    }
+
+    private static void printSortedDirectionTest(int[] array, int userChoice) {
+        System.out.println(Arrays.toString(array) +
+                ", direction = " + userChoice +
+                " -> " + isSortedInSelectedDirection(array, userChoice));
+    }
+
+    private static void reverseArray(int[] array) {
+        if (array == null) {
+            return;
+        }
+
+        if (array.length < 2) {
+            return;
+        }
+
+        int mid = array.length / 2;
+
+        for (int i = 0; i < mid; i++) {
+            int oppositeIndex = array.length - 1 - i;
+
+            int temp = array[i];
+            array[i] = array[oppositeIndex];
+            array[oppositeIndex] = temp;
+        }
+    }
+
+    private static void testReverseArray() {
+        int[] testArrayFirst = {1, 2, 3, 4, 5, 6};
+        int[] testArraySecond = {7, 5, 3, 1, 0};
+        int[] testArrayThird = {9};
+        int[] emptyArray = {};
+        int[] nullArray = null;
+
+        printReverseArrayTest(testArrayFirst);
+        printReverseArrayTest(testArraySecond);
+        printReverseArrayTest(testArrayThird);
+        printReverseArrayTest(emptyArray);
+        printReverseArrayTest(nullArray);
+    }
+
+    private static void printReverseArrayTest(int[] array) {
+        String before = Arrays.toString(array);
+
+        reverseArray(array);
+
+        System.out.println(before + " -> " + Arrays.toString(array));
     }
 }
 
