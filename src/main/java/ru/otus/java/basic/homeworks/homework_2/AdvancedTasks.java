@@ -12,6 +12,7 @@ public class AdvancedTasks {
 
     public static int[] sumArrays(int[]... arrays) {
         int maxLength = 0;
+
         for (int[] currentArray : arrays) {
             if (currentArray == null) {
                 continue;
@@ -37,10 +38,19 @@ public class AdvancedTasks {
         int[] firstArray = {1, 2, 3};
         int[] secondArray = {2, 2};
         int[] thirdArray = {1, 1, 1, 1, 1};
+        int[] emptyArray = {};
+        int[] nullArray = null;
 
-        int[] result = sumArrays(firstArray, secondArray, thirdArray);
+        printSumArraysTest(firstArray, secondArray, thirdArray);
+        printSumArraysTest(firstArray, emptyArray);
+        printSumArraysTest(firstArray, nullArray, thirdArray);
+        printSumArraysTest(emptyArray);
+        printSumArraysTest(nullArray);
+    }
 
-        System.out.println(Arrays.toString(result));
+    private static void printSumArraysTest(int[]... arrays) {
+        System.out.println(Arrays.deepToString(arrays) + " -> " +
+                Arrays.toString(sumArrays(arrays)));
     }
 
     public static boolean hasBalancePoint(int[] numbers) {
