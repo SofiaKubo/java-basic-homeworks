@@ -4,8 +4,9 @@ import java.util.Arrays;
 
 public class AdvancedTasks {
     public static void main(String[] args) {
-        testSumArrays();
-        testBalancePoint();
+//        testSumArrays();
+//        testBalancePoint();
+        testInSelectedDirection();
     }
 
     public static int[] sumArrays(int[]... arrays) {
@@ -83,6 +84,58 @@ public class AdvancedTasks {
                 hasBalancePoint(emptyArray));
         System.out.println(Arrays.toString(nullArray) + " -> " +
                 hasBalancePoint(nullArray));
+    }
+
+    private static boolean isSortedInSelectedDirection(int[] array, int userChoice) {
+        if (array == null) {
+            return false;
+        }
+
+        if (userChoice != 1 && userChoice != 2) {
+            return false;
+        }
+
+        if (array.length < 2) {
+            return true;
+        }
+
+        if (userChoice == 1) { // Choice 1 means increasing
+            for (int i = 0; i < array.length - 1; i++) {
+                if (array[i] > array[i + 1]) {
+                    return false;
+                }
+            }
+            return true;
+        } else { // Choice 2 means decreasing
+            for (int i = 0; i < array.length - 1; i++) {
+                if (array[i] < array[i + 1]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    private static void testInSelectedDirection() {
+        int[] testArrayFirst = {1, 2, 5};
+        int[] testArraySecond = {5, 3, 1, -2};
+        int[] testArrayThird = {7, 12, 1};
+        int[] testArrayFourth = {9};
+        int[] emptyArray = {};
+        int[] nullArray = null;
+
+        System.out.println(Arrays.toString(testArrayFirst) + " -> " +
+                isSortedInSelectedDirection(testArrayFirst, 1));
+        System.out.println(Arrays.toString(testArraySecond) + " -> " +
+                isSortedInSelectedDirection(testArraySecond, 2));
+        System.out.println(Arrays.toString(testArrayThird) + " -> " +
+                isSortedInSelectedDirection(testArrayThird, 1));
+        System.out.println(Arrays.toString(testArrayFourth) + " -> " +
+                isSortedInSelectedDirection(testArrayFourth, 2));
+        System.out.println(Arrays.toString(emptyArray) + " -> " +
+                isSortedInSelectedDirection(emptyArray, 1));
+        System.out.println(Arrays.toString(nullArray) + " -> " +
+                isSortedInSelectedDirection(nullArray, 1));
     }
 }
 
