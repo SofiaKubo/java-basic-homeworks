@@ -20,6 +20,10 @@ public class Main {
     }
 
     public static void sumMoreThanFive(int[] array) {
+        if (array == null) {
+            return;
+        }
+
         int sum = 0;
         for (int number : array) {
             if (number > 5) {
@@ -30,6 +34,10 @@ public class Main {
     }
 
     public static void fillArray(int value, int[] array) {
+        if (array == null) {
+            return;
+        }
+
         for (int i = 0; i < array.length; i++) {
             array[i] = value;
         }
@@ -37,6 +45,10 @@ public class Main {
     }
 
     public static void increaseArrayElements(int value, int[] array) {
+        if (array == null) {
+            return;
+        }
+
         for (int i = 0; i < array.length; i++) {
             array[i] += value;
         }
@@ -44,6 +56,10 @@ public class Main {
     }
 
     public static void printGreaterHalfSum(int[] array) {
+        if (array == null) {
+            return;
+        }
+
         int leftSum = 0;
         int rightSum = 0;
         int mid = array.length / 2;
