@@ -2,11 +2,11 @@ package ru.otus.java.basic.homeworks.homework_3;
 
 public class Main {
     public static void main(String[] args) {
-//        testSumOfPositiveElements();
+        testSumOfPositiveElements();
         testPrintSquare();
-//        testZeroMainDiagonal();
-//        testFindMax();
-//        testSumSecondRow();
+        testZeroMainDiagonal();
+        testFindMax();
+        testSumSecondRow();
     }
 
     public static int sumOfPositiveElements(int[][] arr) {
@@ -120,8 +120,8 @@ public class Main {
         int[][] firstArray = {
                 {1, 2, 3},
                 {4, 5, 6},
-                {7, 8, 9}};
-
+                {7, 8, 9}
+        };
 
         int[][] secondArray = {
                 null,
@@ -137,25 +137,18 @@ public class Main {
         int[][] emptyArray = {};
         int[][] nullArray = null;
 
-        System.out.println("firstArray:");
-        zeroMainDiagonal(firstArray);
-        print2DArray(firstArray);
+        runZeroMainDiagonalTest("firstArray", firstArray);
+        runZeroMainDiagonalTest("secondArray", secondArray);
+        runZeroMainDiagonalTest("thirdArray", thirdArray);
+        runZeroMainDiagonalTest("emptyArray", emptyArray);
+        runZeroMainDiagonalTest("nullArray", nullArray);
+    }
 
-        System.out.println("secondArray:");
-        zeroMainDiagonal(secondArray);
-        print2DArray(secondArray);
-
-        System.out.println("thirdArray:");
-        zeroMainDiagonal(thirdArray);
-        print2DArray(thirdArray);
-
-        System.out.println("emptyArray:");
-        zeroMainDiagonal(emptyArray);
-        print2DArray(emptyArray);
-
-        System.out.println("nullArray:");
-        zeroMainDiagonal(nullArray);
-        print2DArray(nullArray);
+    private static void runZeroMainDiagonalTest(String testName, int[][] array) {
+        System.out.println(testName + ":");
+        zeroMainDiagonal(array);
+        print2DArray(array);
+        System.out.println();
     }
 
     public static void print2DArray(int[][] arr) {
