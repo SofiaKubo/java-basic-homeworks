@@ -46,19 +46,32 @@ public class Main {
                 {7, 8, 10}
         };
 
+        int[][] arrayWithZeros = {
+                {0, 1, 2},
+                {0, -5, 3}
+        };
+
+        int[][] arrayWithEmptyRow = {
+                {},
+                {1, 2, 3}
+        };
+
         int[][] emptyArray = {};
         int[][] nullArray = null;
 
+        checkSumOfPositiveElements("firstArray", firstArray, 0);
+        checkSumOfPositiveElements("secondArray", secondArray, 6);
+        checkSumOfPositiveElements("thirdArray", thirdArray, 117);
+        checkSumOfPositiveElements("arrayWithZeros", arrayWithZeros, 6);
+        checkSumOfPositiveElements("arrayWithEmptyRow", arrayWithEmptyRow, 6);
+        checkSumOfPositiveElements("emptyArray", emptyArray, 0);
+        checkSumOfPositiveElements("nullArray", nullArray, 0);
+    }
+
+    private static void checkSumOfPositiveElements(String testName, int[][] array, int expected) {
+        int actual = sumOfPositiveElements(array);
         System.out.println(
-                "firstArraySum = " + sumOfPositiveElements(firstArray));
-        System.out.println(
-                "secondArraySum = " + sumOfPositiveElements(secondArray));
-        System.out.println(
-                "thirdArraySum = " + sumOfPositiveElements(thirdArray));
-        System.out.println(
-                "emptyArraySum = " + sumOfPositiveElements(emptyArray));
-        System.out.println(
-                "nullArraySum = " + sumOfPositiveElements(nullArray));
+                testName + ": expected = " + expected + ", actual = " + actual);
     }
 
     public static void printSquare(int size) {
