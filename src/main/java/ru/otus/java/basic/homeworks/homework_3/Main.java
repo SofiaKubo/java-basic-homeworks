@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args) {
         testSumOfPositiveElements();
         testPrintSquare();
+        testZeroMainDiagonal();
     }
 
     public static int sumOfPositiveElements(int[][] arr) {
@@ -81,4 +82,81 @@ public class Main {
         System.out.println("size: 4");
         printSquare(4);
     }
+
+    public static void zeroMainDiagonal(int[][] arr) {
+        if (arr == null) {
+            return;
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == null) {
+                continue;
+            }
+
+            if (i < arr[i].length) {
+                arr[i][i] = 0;
+            }
+        }
+    }
+
+    private static void testZeroMainDiagonal() {
+        int[][] firstArray = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}};
+
+
+        int[][] secondArray = {
+                null,
+                {1, 2, 3}
+        };
+
+        int[][] thirdArray = {
+                {1, 2, 3},
+                {4},
+                {5, 6, 7}
+        };
+
+        int[][] emptyArray = {};
+        int[][] nullArray = null;
+
+        System.out.println("firstArray:");
+        zeroMainDiagonal(firstArray);
+        print2DArray(firstArray);
+
+        System.out.println("secondArray:");
+        zeroMainDiagonal(secondArray);
+        print2DArray(secondArray);
+
+        System.out.println("thirdArray:");
+        zeroMainDiagonal(thirdArray);
+        print2DArray(thirdArray);
+
+        System.out.println("emptyArray:");
+        zeroMainDiagonal(emptyArray);
+        print2DArray(emptyArray);
+
+        System.out.println("nullArray:");
+        zeroMainDiagonal(nullArray);
+        print2DArray(nullArray);
+    }
+
+    public static void print2DArray(int[][] arr) {
+        if (arr == null) {
+            System.out.println("null");
+            return;
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == null) {
+                System.out.println("null");
+                continue;
+            }
+            for (int j = 0; j < arr[i].length; j++) {
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
 }
+
