@@ -2,11 +2,11 @@ package ru.otus.java.basic.homeworks.homework_3;
 
 public class Main {
     public static void main(String[] args) {
-        testSumOfPositiveElements();
+//        testSumOfPositiveElements();
         testPrintSquare();
-        testZeroMainDiagonal();
-        testFindMax();
-        testSumSecondRow();
+//        testZeroMainDiagonal();
+//        testFindMax();
+//        testSumSecondRow();
     }
 
     public static int sumOfPositiveElements(int[][] arr) {
@@ -88,14 +88,16 @@ public class Main {
     }
 
     private static void testPrintSquare() {
-        System.out.println("size: 1");
-        printSquare(1);
+        printSquareTest(1);
+        printSquareTest(0);
+        printSquareTest(-1);
+        printSquareTest(4);
+    }
 
-        System.out.println("size: -1");
-        printSquare(-1);
-
-        System.out.println("size: 4");
-        printSquare(4);
+    private static void printSquareTest(int size) {
+        System.out.println("size: " + size);
+        printSquare(size);
+        System.out.println();
     }
 
     public static void zeroMainDiagonal(int[][] arr) {
