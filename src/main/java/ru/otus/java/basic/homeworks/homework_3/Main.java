@@ -264,7 +264,7 @@ public class Main {
         return sum;
     }
 
-    public static void testSumSecondRow() {
+    private static void testSumSecondRow() {
         int[][] firstArray = {
                 {1, 2, 3},
                 {4, 5, 6},
@@ -281,8 +281,9 @@ public class Main {
                 null,
                 {5, 6, 77}
         };
+
         int[][] fourthArray = {
-                {-10, -5},
+                {-10, -5}
         };
 
         int[][] fifthArray = {
@@ -295,26 +296,29 @@ public class Main {
                 {}
         };
 
+        int[][] seventhArray = {
+                {1, 2, 3},
+                {-10, 5, -3}
+        };
+
         int[][] emptyArray = {};
         int[][] nullArray = null;
 
+        checkSumSecondRow("firstArray", firstArray, 15);
+        checkSumSecondRow("secondArray", secondArray, 336);
+        checkSumSecondRow("thirdArray", thirdArray, -1);
+        checkSumSecondRow("fourthArray", fourthArray, -1);
+        checkSumSecondRow("fifthArray", fifthArray, -1);
+        checkSumSecondRow("sixthArray", sixthArray, 0);
+        checkSumSecondRow("seventhArray", seventhArray, -8);
+        checkSumSecondRow("emptyArray", emptyArray, -1);
+        checkSumSecondRow("nullArray", nullArray, -1);
+    }
 
+    private static void checkSumSecondRow(String testName, int[][] array, int expected) {
+        int actual = sumSecondRow(array);
         System.out.println(
-                "firstArray = " + sumSecondRow(firstArray));
-        System.out.println(
-                "secondArray = " + sumSecondRow(secondArray));
-        System.out.println(
-                "thirdArray = " + sumSecondRow(thirdArray));
-        System.out.println(
-                "fourthArray = " + sumSecondRow(fourthArray));
-        System.out.println(
-                "fifthArray = " + sumSecondRow(fifthArray));
-        System.out.println(
-                "sixthArray = " + sumSecondRow(sixthArray));
-        System.out.println(
-                "emptyArray = " + sumSecondRow(emptyArray));
-        System.out.println(
-                "nullArray = " + sumSecondRow(nullArray));
+                testName + ": expected = " + expected + ", actual = " + actual);
     }
 }
 
