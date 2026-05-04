@@ -191,16 +191,19 @@ public class Main {
                 }
             }
         }
+        if (!hasElements) {
+            return 0;
+        }
 
         return max;
     }
 
-    public static void testFindMax() {
+    private static void testFindMax() {
         int[][] firstArray = {
                 {-1, 0, 334},
                 {4, 5, 17, 5},
-                {20, 9}};
-
+                {20, 9}
+        };
 
         int[][] secondArray = {
                 null,
@@ -212,27 +215,39 @@ public class Main {
                 {4},
                 {5, 6, 77}
         };
+
         int[][] fourthArray = {
                 {-10, -5},
                 {-3, -8}
         };
 
+        int[][] emptyRowsArray = {
+                {},
+                {}
+        };
+
+        int[][] nullRowsArray = {
+                null,
+                null
+        };
+
         int[][] emptyArray = {};
         int[][] nullArray = null;
 
+        checkFindMax("firstArray", firstArray, 334);
+        checkFindMax("secondArray", secondArray, 333);
+        checkFindMax("thirdArray", thirdArray, 77);
+        checkFindMax("fourthArray", fourthArray, -3);
+        checkFindMax("emptyRowsArray", emptyRowsArray, 0);
+        checkFindMax("nullRowsArray", nullRowsArray, 0);
+        checkFindMax("emptyArray", emptyArray, 0);
+        checkFindMax("nullArray", nullArray, 0);
+    }
 
+    private static void checkFindMax(String testName, int[][] array, int expected) {
+        int actual = findMax(array);
         System.out.println(
-                "firstArrayMaxElement = " + findMax(firstArray));
-        System.out.println(
-                "secondArrayMaxElement = " + findMax(secondArray));
-        System.out.println(
-                "thirdArrayMaxElement = " + findMax(thirdArray));
-        System.out.println(
-                "fourthArrayMaxElement = " + findMax(fourthArray));
-        System.out.println(
-                "emptyArrayMaxElement = " + findMax(emptyArray));
-        System.out.println(
-                "nullArrayMaxElement = " + findMax(nullArray));
+                testName + ": expected = " + expected + ", actual = " + actual);
     }
 
     public static int sumSecondRow(int[][] arr) {
