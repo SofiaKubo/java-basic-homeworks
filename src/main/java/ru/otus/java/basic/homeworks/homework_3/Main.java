@@ -2,9 +2,10 @@ package ru.otus.java.basic.homeworks.homework_3;
 
 public class Main {
     public static void main(String[] args) {
-        testSumOfPositiveElements();
-        testPrintSquare();
-        testZeroMainDiagonal();
+//        testSumOfPositiveElements();
+//        testPrintSquare();
+//        testZeroMainDiagonal();
+        testFindMax();
     }
 
     public static int sumOfPositiveElements(int[][] arr) {
@@ -157,6 +158,72 @@ public class Main {
             }
             System.out.println();
         }
+    }
+
+    public static int findMax(int[][] arr) {
+        if (arr == null) {
+            return 0;
+        }
+
+        boolean hasElements = false;
+        int max = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == null) {
+                continue;
+            }
+
+            for (int j = 0; j < arr[i].length; j++) {
+                if (!hasElements) {
+                    max = arr[i][j];
+                    hasElements = true;
+                } else if (arr[i][j] > max) {
+                    max = arr[i][j];
+                }
+            }
+        }
+
+        return max;
+    }
+
+    public static void testFindMax() {
+        int[][] firstArray = {
+                {-1, 0, 334},
+                {4, 5, 17, 5},
+                {20, 9}};
+
+
+        int[][] secondArray = {
+                null,
+                {1, 2, 333}
+        };
+
+        int[][] thirdArray = {
+                {1, 2, 3},
+                {4},
+                {5, 6, 77}
+        };
+        int[][] fourthArray = {
+            {-10, -5},
+            {-3, -8}
+        };
+
+        int[][] emptyArray = {};
+        int[][] nullArray = null;
+
+
+        System.out.println(
+                "firstArrayMaxElement = " + findMax(firstArray));
+        System.out.println(
+                "secondArrayMaxElement = " + findMax(secondArray));
+        System.out.println(
+                "thirdArrayMaxElement = " + findMax(thirdArray));
+        System.out.println(
+                "fourthArrayMaxElement = " + findMax(fourthArray));
+        System.out.println(
+                "emptyArrayMaxElement = " + findMax(emptyArray));
+        System.out.println(
+                "nullArrayMaxElement = " + findMax(nullArray));
     }
 }
 
