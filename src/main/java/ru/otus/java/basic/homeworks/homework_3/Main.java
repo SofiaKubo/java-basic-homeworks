@@ -2,10 +2,11 @@ package ru.otus.java.basic.homeworks.homework_3;
 
 public class Main {
     public static void main(String[] args) {
-//        testSumOfPositiveElements();
-//        testPrintSquare();
-//        testZeroMainDiagonal();
+        testSumOfPositiveElements();
+        testPrintSquare();
+        testZeroMainDiagonal();
         testFindMax();
+        testSumSecondRow();
     }
 
     public static int sumOfPositiveElements(int[][] arr) {
@@ -204,8 +205,8 @@ public class Main {
                 {5, 6, 77}
         };
         int[][] fourthArray = {
-            {-10, -5},
-            {-3, -8}
+                {-10, -5},
+                {-3, -8}
         };
 
         int[][] emptyArray = {};
@@ -224,6 +225,73 @@ public class Main {
                 "emptyArrayMaxElement = " + findMax(emptyArray));
         System.out.println(
                 "nullArrayMaxElement = " + findMax(nullArray));
+    }
+
+    public static int sumSecondRow(int[][] arr) {
+        if (arr == null || arr.length < 2 || arr[1] == null) {
+            return -1;
+        }
+
+        int sum = 0;
+
+        for (int j = 0; j < arr[1].length; j++) {
+            sum += arr[1][j];
+        }
+
+        return sum;
+    }
+
+    public static void testSumSecondRow() {
+        int[][] firstArray = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+
+        int[][] secondArray = {
+                null,
+                {1, 2, 333}
+        };
+
+        int[][] thirdArray = {
+                {1, 2, 3},
+                null,
+                {5, 6, 77}
+        };
+        int[][] fourthArray = {
+                {-10, -5},
+        };
+
+        int[][] fifthArray = {
+                null,
+                null
+        };
+
+        int[][] sixthArray = {
+                {1, 2, 3},
+                {}
+        };
+
+        int[][] emptyArray = {};
+        int[][] nullArray = null;
+
+
+        System.out.println(
+                "firstArray = " + sumSecondRow(firstArray));
+        System.out.println(
+                "secondArray = " + sumSecondRow(secondArray));
+        System.out.println(
+                "thirdArray = " + sumSecondRow(thirdArray));
+        System.out.println(
+                "fourthArray = " + sumSecondRow(fourthArray));
+        System.out.println(
+                "fifthArray = " + sumSecondRow(fifthArray));
+        System.out.println(
+                "sixthArray = " + sumSecondRow(sixthArray));
+        System.out.println(
+                "emptyArray = " + sumSecondRow(emptyArray));
+        System.out.println(
+                "nullArray = " + sumSecondRow(nullArray));
     }
 }
 
