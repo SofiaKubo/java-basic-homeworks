@@ -3,6 +3,7 @@ package ru.otus.java.basic.homeworks.homework_3;
 public class Main {
     public static void main(String[] args) {
         testSumOfPositiveElements();
+        testPrintSquare();
     }
 
     public static int sumOfPositiveElements(int[][] arr) {
@@ -55,5 +56,29 @@ public class Main {
                 "emptyArraySum = " + sumOfPositiveElements(emptyArray));
         System.out.println(
                 "nullArraySum = " + sumOfPositiveElements(nullArray));
+    }
+
+    public static void printSquare(int size) {
+        if (size <= 0) {
+            return;
+        }
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+
+    private static void testPrintSquare() {
+        System.out.println("size: 1");
+        printSquare(1);
+
+        System.out.println("size: -1");
+        printSquare(-1);
+
+        System.out.println("size: 4");
+        printSquare(4);
     }
 }
