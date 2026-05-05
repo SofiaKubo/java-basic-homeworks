@@ -19,6 +19,10 @@ public class User {
         this.email = email;
     }
 
+    public int getBirthYear() {
+        return birthYear;
+    }
+
     public void printInfo() {
         System.out.println(
                 "ФИО: " + lastName + " " + firstName + " " + middleName);
