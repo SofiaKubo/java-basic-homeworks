@@ -25,5 +25,57 @@ public class Main {
                 System.out.println();
             }
         }
+
+        System.out.println("Проверка работы коробки:");
+        System.out.println();
+
+        Box box = new Box(30, 20, 15, "Фиолетовый");
+
+        System.out.println("Начальное состояние коробки:");
+        box.printInfo();
+        System.out.println();
+
+        System.out.println("Пробуем положить предмет в закрытую коробку:");
+        box.putItem("Мяч");
+        System.out.println();
+
+        System.out.println("Открываем коробку:");
+        box.open();
+        System.out.println();
+
+        System.out.println("Кладём предмет в открытую коробку:");
+        box.putItem("Мяч");
+        System.out.println();
+
+        System.out.println("Пробуем положить второй предмет:");
+        box.putItem("Книга");
+        System.out.println();
+
+        System.out.println("Состояние коробки после добавления предмета:");
+        box.printInfo();
+        System.out.println();
+
+        System.out.println("Достаём предмет из открытой коробки:");
+        box.removeItem();
+        System.out.println();
+
+        System.out.println("Пробуем достать предмет из пустой коробки:");
+        box.removeItem();
+        System.out.println();
+
+        System.out.println("Перекрашиваем коробку:");
+        box.repaint("Желтый");
+        System.out.println();
+
+        System.out.println("Закрываем коробку:");
+        box.close();
+        System.out.println();
+
+        System.out.println("Пробуем достать предмет из закрытой коробки:");
+        box.removeItem();
+        System.out.println();
+
+        System.out.println("Финальное состояние коробки:");
+        box.printInfo();
     }
 }
