@@ -42,10 +42,12 @@ public class Box {
     }
 
     public void printInfo() {
-        System.out.println("Размер коробки: " + length + " x " + width + " x " + height);
+        System.out.println(
+                "Размер коробки: " + length + " x " + width + " x " + height);
         System.out.println("Цвет: " + color);
         System.out.println("Состояние: " + (isOpen ? "открыта" : "закрыта"));
-        System.out.println("Предмет внутри: " + (item == null ? "отсутствует" : item));
+        System.out.println(
+                "Предмет внутри: " + (item == null ? "отсутствует" : item));
     }
 
     public void putItem(String item) {
