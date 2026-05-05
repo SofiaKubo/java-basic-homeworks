@@ -2,11 +2,8 @@ package ru.otus.java.basic.homeworks.homework_4;
 
 public class User {
     private String lastName;
-
     private String firstName;
-
     private String middleName;
-
     private int birthYear;
     private String email;
 
