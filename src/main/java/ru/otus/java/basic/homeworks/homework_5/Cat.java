@@ -5,16 +5,11 @@ public class Cat extends Animal {
     private static final int SWIM_STAMINA_COST_PER_METER = 0;
 
     public Cat(String name, int runningSpeed, int stamina) {
-        super(name, runningSpeed, SWIM_SPEED, stamina);
+        super(name, runningSpeed, SWIM_SPEED, stamina, SWIM_STAMINA_COST_PER_METER);
     }
 
     @Override
     protected boolean canSwim() {
         return false;
-    }
-
-    @Override
-    protected int getSwimStaminaCostPerMeter() {
-        return SWIM_STAMINA_COST_PER_METER;
     }
 }

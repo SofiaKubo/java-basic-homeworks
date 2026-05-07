@@ -5,21 +5,21 @@ public abstract class Animal {
     private final int runningSpeed;
     private final int swimmingSpeed;
     private int stamina;
+    private final int swimStaminaCostPerMeter;
     private boolean tired;
 
     private static final int RUN_STAMINA_COST_PER_METER = 1;
 
-    public Animal(String name, int runningSpeed, int swimmingSpeed, int stamina) {
+    public Animal(String name, int runningSpeed, int swimmingSpeed, int stamina, int swimStaminaCostPerMeter) {
         this.name = name;
         this.runningSpeed = runningSpeed;
         this.swimmingSpeed = swimmingSpeed;
         this.stamina = stamina;
+        this.swimStaminaCostPerMeter = swimStaminaCostPerMeter;
         this.tired = false;
     }
 
     protected abstract boolean canSwim();
-
-    protected abstract int getSwimStaminaCostPerMeter();
 
     private double performAction(
             int distance,
@@ -77,7 +77,7 @@ public abstract class Animal {
         return performAction(
                 distance,
                 swimmingSpeed,
-                getSwimStaminaCostPerMeter(),
+                swimStaminaCostPerMeter,
                 canSwim(),
                 "проплыть"
         );
