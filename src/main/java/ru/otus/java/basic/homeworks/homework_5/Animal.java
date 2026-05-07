@@ -57,9 +57,8 @@ public abstract class Animal {
         tired = stamina == 0;
 
         double time = (double) distance / speed;
-        System.out.println(
-                name + " смог " + actionName + " " + distance + " м за " +
-                        time + " сек.");
+        System.out.printf("%s смог %s %d м за %.2f сек.%n",
+                name, actionName, distance, time);
         return time;
     }
 
@@ -86,10 +85,10 @@ public abstract class Animal {
     public void info() {
         System.out.println(
                 "Животное: " + name +
-                        ", скорость бега: " + runningSpeed +
-                        ", скорость плавания: " + swimmingSpeed +
-                        ", выносливость: " + stamina +
-                        ", состояние: " + (tired ? "устал" : "не устал")
+                        ", скорость бега: " + runningSpeed + " м/с," +
+                        " скорость плавания: " + swimmingSpeed + " м/с," +
+                        " выносливость: " + stamina + " у.е," +
+                        " состояние: " + (tired ? "устал" : "полон сил.")
         );
     }
 }
