@@ -29,13 +29,22 @@ public class Main {
             System.out.println();
         }
 
-        System.out.println("Проверка плавания на дистанции 10 м:");
-        for (Animal animal : animals) {
-            double swimTime = animal.swim(10);
-            System.out.printf("Результат: %.2f.%n", swimTime);
-            animal.info();
-            System.out.println();
-        }
+        System.out.println("Проверка плавания:");
+
+        double catSwimTime = barsik.swim(10);
+        System.out.printf("Результат: %.2f.%n", catSwimTime);
+        barsik.info();
+        System.out.println();
+
+        double dogSwimTime = sharik.swim(10);
+        System.out.printf("Результат: %.2f.%n", dogSwimTime);
+        sharik.info();
+        System.out.println();
+
+        double horseSwimTime = bruno.swim(8);
+        System.out.printf("Результат: %.2f.%n", horseSwimTime);
+        bruno.info();
+        System.out.println();
 
         System.out.println("Проверка усталости на большой дистанции:");
         for (Animal animal : animals) {
