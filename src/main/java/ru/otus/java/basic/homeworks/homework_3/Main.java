@@ -7,13 +7,13 @@ public class Main {
         }
 
         int sum = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == null) {
+        for (int[] row : arr) {
+            if (row == null) {
                 continue;
             }
-            for (int j = 0; j < arr[i].length; j++) {
-                if (arr[i][j] > 0) {
-                    sum += arr[i][j];
+            for (int value : row) {
+                if (value > 0) {
+                    sum += value;
                 }
             }
         }
