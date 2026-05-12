@@ -15,7 +15,7 @@ public class Plate {
 
     public void addFood(int amount) {
         if (amount <= 0) {
-            return;
+            throw new IllegalArgumentException("Food amount must be positive");
         }
 
         int availableSpace = maxFood - currentFood;
@@ -29,7 +29,7 @@ public class Plate {
 
     public boolean decreaseFood(int amount) {
         if (amount <= 0) {
-            return false;
+            throw new IllegalArgumentException("Food amount must be positive");
         }
 
         if (currentFood < amount) {
