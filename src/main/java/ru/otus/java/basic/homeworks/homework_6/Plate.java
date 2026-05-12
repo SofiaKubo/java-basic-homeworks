@@ -25,4 +25,17 @@ public class Plate {
 
         currentFood += amount;
     }
+
+    public boolean decreaseFood(int amount) {
+        if (amount <= 0) {
+            return false;
+        }
+
+        if (currentFood < amount) {
+            return false;
+        }
+
+        currentFood -= amount;
+        return true;
+    }
 }
