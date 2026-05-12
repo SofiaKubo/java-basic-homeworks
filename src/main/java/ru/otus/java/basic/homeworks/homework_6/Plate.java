@@ -18,7 +18,8 @@ public class Plate {
             return;
         }
 
-        if (currentFood + amount > maxFood) {
+        int availableSpace = maxFood - currentFood;
+        if (amount >= availableSpace) {
             currentFood = maxFood;
             return;
         }
@@ -37,5 +38,21 @@ public class Plate {
 
         currentFood -= amount;
         return true;
+    }
+
+    public int getMaxFood() {
+        return maxFood;
+    }
+
+    public int getCurrentFood() {
+        return currentFood;
+    }
+
+    @Override
+    public String toString() {
+        return "Plate{" +
+                "maxFood=" + maxFood +
+                ", currentFood=" + currentFood +
+                '}';
     }
 }
