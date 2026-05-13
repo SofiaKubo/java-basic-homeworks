@@ -31,8 +31,8 @@ public class Cat {
     public String toString() {
         return "Cat {" +
                 "имя = " + name +
-                ", аппетит = " + appetite + " у.е," +
-                ", сытость = " + (isFull ? "сытый" : "голодный.") +
+                ", аппетит = " + appetite + " у.е." +
+                ", сытость = " + (isFull ? "сытый" : "голодный") +
                 '}';
     }
 }
