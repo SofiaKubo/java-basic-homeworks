@@ -40,19 +40,11 @@ public class Plate {
         return true;
     }
 
-    public int getMaxFood() {
-        return maxFood;
-    }
-
-    public int getCurrentFood() {
-        return currentFood;
-    }
-
     @Override
     public String toString() {
-        return "Plate{" +
-                "maxFood=" + maxFood +
-                ", currentFood=" + currentFood +
+        return "Plate {" +
+                "maxFood = " + maxFood +
+                ", currentFood = " + currentFood +
                 '}';
     }
 }
