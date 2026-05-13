@@ -43,8 +43,8 @@ public class Plate {
     @Override
     public String toString() {
         return "Plate {" +
-                "maxFood = " + maxFood +
-                ", currentFood = " + currentFood +
+                "Максимальное количество еды = " + maxFood + " у.е," +
+                ", currentFood = " + currentFood + " у.е," +
                 '}';
     }
 }
