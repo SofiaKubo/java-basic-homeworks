@@ -19,6 +19,10 @@ public class Cat {
         this.isFull = false;
     }
 
+    public boolean isFull() {
+        return isFull;
+    }
+
     public void eat(Plate plate) {
         if (plate == null) {
             throw new IllegalArgumentException("Plate must not be null");
