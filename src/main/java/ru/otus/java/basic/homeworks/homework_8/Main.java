@@ -73,6 +73,8 @@ public class Main {
             );
         }
 
+        int sum = 0;
+
         for (int i = 0; i < array.length; i++) {
             String[] row = array[i];
 
@@ -91,13 +93,9 @@ public class Main {
                                 + ", actual: " + row.length + "."
                 );
             }
-        }
 
-        int sum = 0;
-
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[i].length; j++) {
-                String value = array[i][j];
+            for (int j = 0; j < row.length; j++) {
+                String value = row[j];
 
                 try {
                     sum += Integer.parseInt(value);
