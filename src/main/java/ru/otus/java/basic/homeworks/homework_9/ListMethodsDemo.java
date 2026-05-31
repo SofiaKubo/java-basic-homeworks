@@ -17,13 +17,9 @@ public class ListMethodsDemo {
 
     private static void demoCreateRangeList() {
         System.out.println("Demo: createRangeList");
-        System.out.println(
-                "createRangeList(1, 5): " + ListMethods.createRangeList(1, 5));
-        System.out.println(
-                "createRangeList(5, 5): " + ListMethods.createRangeList(5, 5));
-        System.out.println("createRangeList(-5, -10): " +
-                ListMethods.createRangeList(-5, -10));
-        System.out.println();
+        testCreateRangeList("Increasing range", 1, 5);
+        testCreateRangeList("Single value range", 5, 5);
+        testCreateRangeList("Invalid range", -5, -10);
     }
 
     private static void demoSumElementsGreaterThanFive() {
@@ -80,6 +76,23 @@ public class ListMethodsDemo {
         testFindYoungestEmployee("Correct employee list", createEmployees());
         testFindYoungestEmployee("Empty employee list", new ArrayList<>());
         testFindYoungestEmployee("Employee list with null element", createEmployeesWithNull());
+    }
+
+    private static void testCreateRangeList(String testName, int min, int max) {
+        System.out.println("Test: " + testName);
+
+        try {
+            List<Integer> result = ListMethods.createRangeList(min, max);
+            System.out.println("Min:    " + min);
+            System.out.println("Max:    " + max);
+            System.out.println("Result: " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Min:         " + min);
+            System.out.println("Max:         " + max);
+            System.out.println("Input error: " + e.getMessage());
+        }
+
+        System.out.println();
     }
 
     private static void testSumElementsGreaterThanFive(String testName, List<Integer> list) {

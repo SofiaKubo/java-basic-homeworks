@@ -5,11 +5,14 @@ import java.util.List;
 
 public class ListMethods {
     public static List<Integer> createRangeList(int min, int max) {
-        List<Integer> list = new ArrayList<>();
-
         if (min > max) {
-            return list;
+            throw new IllegalArgumentException(
+                    "min must be less than or equal to max: min=" + min +
+                            ", max=" + max + "."
+            );
         }
+
+        List<Integer> list = new ArrayList<>();
 
         for (int i = min; i <= max; i++) {
             list.add(i);
