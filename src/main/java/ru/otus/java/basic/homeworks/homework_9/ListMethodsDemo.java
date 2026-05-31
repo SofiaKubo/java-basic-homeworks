@@ -35,6 +35,7 @@ public class ListMethodsDemo {
 
         testFillList("Correct list", createStandardIntegerList(), 1);
         testFillList("List with null element", createIntegerListWithNull(), 4);
+        testFillList("Unmodifiable list", createUnmodifiableIntegerList(), 4);
     }
 
     private static void demoIncreaseAllElements() {
@@ -43,6 +44,7 @@ public class ListMethodsDemo {
         testIncreaseAllElements("Correct list", createStandardIntegerList(), 10);
         testIncreaseAllElements("Negative value", createPositiveIntegerList(), -10);
         testIncreaseAllElements("List with null element", createIntegerListWithNull(), 4);
+        testIncreaseAllElements("Unmodifiable list", createUnmodifiableIntegerList(), 4);
     }
 
     private static void demoGetEmployeeNames() {
@@ -228,6 +230,10 @@ public class ListMethodsDemo {
         numbers.add(10);
 
         return numbers;
+    }
+
+    private static List<Integer> createUnmodifiableIntegerList() {
+        return List.of(1, 2, 3);
     }
 
     private static List<Employee> createEmployees() {

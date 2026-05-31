@@ -56,8 +56,15 @@ public class ListMethods {
             throw new IllegalArgumentException("List is null.");
         }
 
-        for (int i = 0; i < numbers.size(); i++) {
-            numbers.set(i, value);
+        try {
+            for (int i = 0; i < numbers.size(); i++) {
+                numbers.set(i, value);
+            }
+        } catch (UnsupportedOperationException e) {
+            throw new IllegalArgumentException(
+                    "List must be modifiable.",
+                    e
+            );
         }
     }
 
@@ -74,8 +81,18 @@ public class ListMethods {
                         "List contains null element at index " + i + "."
                 );
             }
+        }
 
-            numbers.set(i, number + value);
+        try {
+            for (int i = 0; i < numbers.size(); i++) {
+                Integer number = numbers.get(i);
+                numbers.set(i, number + value);
+            }
+        } catch (UnsupportedOperationException e) {
+            throw new IllegalArgumentException(
+                    "List must be modifiable.",
+                    e
+            );
         }
     }
 
