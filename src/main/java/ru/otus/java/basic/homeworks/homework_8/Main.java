@@ -43,6 +43,8 @@ public class Main {
             System.out.println("Sum: " + result);
         } catch (AppArraySizeException e) {
             System.out.println("Size error: " + e.getMessage());
+        } catch (AppArrayStructureException e) {
+            System.out.println("Structure error: " + e.getMessage());
         } catch (AppArrayDataException e) {
             System.out.println("Data error: " + e.getMessage());
 
@@ -58,7 +60,8 @@ public class Main {
     private static final int REQUIRED_ARRAY_SIZE = 4;
 
     private static int sumArray(String[][] array)
-            throws AppArraySizeException, AppArrayDataException {
+            throws AppArraySizeException, AppArrayStructureException,
+            AppArrayDataException {
 
         if (array == null) {
             throw new AppArraySizeException(
@@ -79,10 +82,8 @@ public class Main {
             String[] row = array[i];
 
             if (row == null) {
-                throw new AppArraySizeException(
-                        "Invalid array structure: row " + i
-                                + " is null. Expected row with "
-                                + REQUIRED_ARRAY_SIZE + " columns."
+                throw new AppArrayStructureException(
+                        "Invalid array structure: row " + i + " is null."
                 );
             }
 
