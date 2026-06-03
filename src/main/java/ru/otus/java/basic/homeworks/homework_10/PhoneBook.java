@@ -1,5 +1,6 @@
 package ru.otus.java.basic.homeworks.homework_10;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class PhoneBook {
         Set<String> phoneNumbers = phoneNumbersByName.get(normalizedName);
 
         if (phoneNumbers == null) {
-            return new HashSet<>();
+            return Collections.emptySet();
         }
         return new HashSet<>(phoneNumbers);
     }
