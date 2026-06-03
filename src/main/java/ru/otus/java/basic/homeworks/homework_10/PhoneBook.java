@@ -30,7 +30,7 @@ public class PhoneBook {
         if (phoneNumbers == null) {
             return Collections.emptySet();
         }
-        return new HashSet<>(phoneNumbers);
+        return Collections.unmodifiableSet(new HashSet<>(phoneNumbers));
     }
 
     public boolean containsPhoneNumber(String phoneNumber) {
