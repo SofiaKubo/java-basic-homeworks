@@ -3,6 +3,7 @@ package ru.otus.java.basic.homeworks.homework_14;
 public class Main {
     private static final int ARRAY_SIZE = 100_000_000;
     private static final int THREAD_COUNT = 4;
+    private static final long NANOS_IN_SECOND = 1_000_000_000L;
 
     public static void main(String[] args) throws InterruptedException {
         runSingleThreaded();
@@ -18,7 +19,8 @@ public class Main {
         long endTimeNanos = System.nanoTime();
         long elapsedTimeNanos = endTimeNanos - startTimeNanos;
 
-        double elapsedTimeSeconds = elapsedTimeNanos / 1_000_000_000.0;
+        double elapsedTimeSeconds = (double) elapsedTimeNanos
+                / NANOS_IN_SECOND;
         System.out.printf(
                 "Single-threaded execution time: %.3f s%n",
                 elapsedTimeSeconds
@@ -53,7 +55,8 @@ public class Main {
         long endTimeNanos = System.nanoTime();
         long elapsedTimeNanos = endTimeNanos - startTimeNanos;
 
-        double elapsedTimeSeconds = elapsedTimeNanos / 1_000_000_000.0;
+        double elapsedTimeSeconds = (double) elapsedTimeNanos
+                / NANOS_IN_SECOND;
 
         System.out.printf(
                 "Multi-threaded execution time: %.3f s%n",
