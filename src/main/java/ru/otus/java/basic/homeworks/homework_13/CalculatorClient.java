@@ -104,16 +104,27 @@ public class CalculatorClient {
         );
 
         String firstInput = scanner.nextLine().strip();
-
         if (EXIT_COMMAND.equalsIgnoreCase(firstInput)) {
             return EXIT_COMMAND;
         }
 
-        System.out.println("Enter an operation (+, -, *, /):");
-        String operation = scanner.nextLine().strip();
+        System.out.println("Enter an operation (+, -, *, /) or \""
+                + EXIT_COMMAND
+                + "\" to finish:");
 
-        System.out.println("Enter the second number:");
+        String operation = scanner.nextLine().strip();
+        if (EXIT_COMMAND.equalsIgnoreCase(operation)) {
+            return EXIT_COMMAND;
+        }
+
+        System.out.println("Enter the second number or \""
+                + EXIT_COMMAND
+                + "\" to finish:");
+
         String rightOperand = scanner.nextLine().strip();
+        if (EXIT_COMMAND.equalsIgnoreCase(rightOperand)) {
+            return EXIT_COMMAND;
+        }
 
         return String.join(
                 REQUEST_DELIMITER,
