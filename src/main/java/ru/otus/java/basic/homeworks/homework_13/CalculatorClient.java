@@ -1,5 +1,8 @@
 package ru.otus.java.basic.homeworks.homework_13;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -12,29 +15,35 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class CalculatorClient {
+    private static final String CLIENT_LOG_PREFIX = "[CLIENT] ";
     private static final String SERVER_HOST = "localhost";
     private static final int SERVER_PORT = 8091;
     private static final String EXIT_COMMAND = "exit";
     private static final String REQUEST_DELIMITER = ";";
+    private static final Logger logger = LoggerFactory.getLogger(CalculatorClient.class);
 
     public static void main(String[] args) {
         try (
                 Scanner scanner = new Scanner(System.in);
                 Socket clientSocket = new Socket(SERVER_HOST, SERVER_PORT)
         ) {
-            System.out.println(
-                    "[CLIENT] Connected to server at "
-                            + SERVER_HOST + " :" + SERVER_PORT + "."
+            logger.info(
+                    "{}Connected to server at {}:{}.",
+                    CLIENT_LOG_PREFIX,
+                    SERVER_HOST,
+                    SERVER_PORT
             );
 
             handleServerSession(clientSocket, scanner);
         } catch (IOException e) {
-            System.err.println(
-                    "[CLIENT] Failed to communicate with server at "
-                            + SERVER_HOST + ":" + SERVER_PORT
-                            + ": " + e.getMessage()
+            logger.error(
+                    "{}Failed to communicate with server at {}:{}: {}",
+                    CLIENT_LOG_PREFIX,
+                    SERVER_HOST,
+                    SERVER_PORT,
+                    e.getMessage(),
+                    e
             );
-            e.printStackTrace();
         }
     }
 
@@ -62,36 +71,37 @@ public class CalculatorClient {
             String availableOperationsMessage = bufferedReader.readLine();
 
             if (availableOperationsMessage == null) {
-                System.out.println(
-                        "[CLIENT] Server disconnected before sending "
-                                + "available operations."
+                logger.info(
+                        "{}Server disconnected before sending available operations.",
+                        CLIENT_LOG_PREFIX
                 );
                 return;
             }
 
-            System.out.println(availableOperationsMessage);
+            logger.info(availableOperationsMessage);
 
             while (true) {
                 String request = readRequest(scanner);
 
                 sendMessage(bufferedWriter, request);
-                System.out.println("[CLIENT] Request sent: " + request);
+                logger.info("{}Request sent: {}", CLIENT_LOG_PREFIX, request);
 
                 if (EXIT_COMMAND.equals(request)) {
-                    System.out.println("[CLIENT] Session finished.");
+                    logger.info("{}Session finished.", CLIENT_LOG_PREFIX);
                     return;
                 }
 
                 String response = bufferedReader.readLine();
 
                 if (response == null) {
-                    System.out.println(
-                            "[CLIENT] Server disconnected without sending a response."
+                    logger.info(
+                            "{}Server disconnected without sending a response.",
+                            CLIENT_LOG_PREFIX
                     );
                     return;
                 }
 
-                System.out.println("[CLIENT] Response received: " + response);
+                logger.info("{}Response received: {}", CLIENT_LOG_PREFIX, response);
             }
         }
     }

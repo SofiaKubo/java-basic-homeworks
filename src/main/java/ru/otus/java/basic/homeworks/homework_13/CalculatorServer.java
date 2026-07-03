@@ -1,5 +1,8 @@
 package ru.otus.java.basic.homeworks.homework_13;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -11,7 +14,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
+
 public class CalculatorServer {
+    private static final String SERVER_LOG_PREFIX = "[SERVER] ";
     private static final int SERVER_PORT = 8091;
     private static final String EXIT_COMMAND = "exit";
     private static final String REQUEST_DELIMITER = ";";
@@ -20,11 +25,11 @@ public class CalculatorServer {
                     + "Type \"exit\" to finish. "
                     + "Use a dot for decimal numbers.";
 
+    private static final Logger logger = LoggerFactory.getLogger(CalculatorServer.class);
+
     public static void main(String[] args) {
         try (ServerSocket serverSocket = new ServerSocket(SERVER_PORT)) {
-            System.out.println(
-                    "[SERVER] Started on port " + SERVER_PORT + "."
-            );
+            logger.info("{}Started on port {}.", SERVER_LOG_PREFIX, SERVER_PORT);
 
             Calculator calculator = new Calculator();
 
@@ -32,25 +37,29 @@ public class CalculatorServer {
                 Socket clientSocket = serverSocket.accept();
 
                 try (clientSocket) {
-                    System.out.println(
-                            "[SERVER] Client connected: "
-                                    + clientSocket.getRemoteSocketAddress()
+                    logger.info(
+                            "{}Client connected: {}",
+                            SERVER_LOG_PREFIX,
+                            clientSocket.getRemoteSocketAddress()
                     );
 
                     handleClient(clientSocket, calculator);
                 } catch (IOException e) {
-                    System.err.println(
-                            "[SERVER] Client communication error: "
-                                    + e.getMessage()
+                    logger.error(
+                            "{}Client communication error: {}",
+                            SERVER_LOG_PREFIX,
+                            e.getMessage(),
+                            e
                     );
-                    e.printStackTrace();
                 }
             }
         } catch (IOException e) {
-            System.err.println(
-                    "[SERVER] Server error: " + e.getMessage()
+            logger.error(
+                    "{}Server error: {}",
+                    SERVER_LOG_PREFIX,
+                    e.getMessage(),
+                    e
             );
-            e.printStackTrace();
         }
     }
 
@@ -76,35 +85,45 @@ public class CalculatorServer {
                 )
         ) {
             sendMessage(bufferedWriter, AVAILABLE_OPERATIONS_MESSAGE);
-            System.out.println(
-                    "[SERVER] Available operations sent to client."
-            );
+            logger.info("{}Available operations sent to client.", SERVER_LOG_PREFIX);
 
             while (true) {
                 String requestMessage = bufferedReader.readLine();
 
                 if (requestMessage == null) {
-                    System.out.println("[SERVER] Client disconnected.");
+                    logger.info("{}Client disconnected.", SERVER_LOG_PREFIX);
                     return;
                 }
 
                 if (EXIT_COMMAND.equalsIgnoreCase(requestMessage.strip())) {
-                    System.out.println("[SERVER] Client session finished.");
+                    logger.info("{}Client session finished.", SERVER_LOG_PREFIX);
                     return;
                 }
 
-                System.out.println(
-                        "[SERVER] Request received: " + requestMessage
+                logger.info(
+                        "{}Request received: {}",
+                        SERVER_LOG_PREFIX,
+                        requestMessage
                 );
 
-                String response = processRequest(
-                        requestMessage,
-                        calculator
-                );
+                String response;
+                try {
+                    response = processRequest(requestMessage, calculator);
+                } catch (Exception e) {
+                    response = "Error: internal server error.";
+                    logger.error(
+                            "{}An internal error occurred while processing request: {}",
+                            SERVER_LOG_PREFIX,
+                            requestMessage,
+                            e
+                    );
+                }
 
                 sendMessage(bufferedWriter, response);
-                System.out.println(
-                        "[SERVER] Response sent: " + response
+                logger.info(
+                        "{}Response sent: {}",
+                        SERVER_LOG_PREFIX,
+                        response
                 );
             }
         }
