@@ -13,10 +13,17 @@ import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 
 public class CalculatorServer {
     private static final String SERVER_LOG_PREFIX = "[SERVER] ";
+    private static final int CLIENT_HANDLER_THREADS = 4;
+    private static final int CLIENT_TASK_QUEUE_CAPACITY = 16;
     private static final int SERVER_PORT = 8091;
     private static final String EXIT_COMMAND = "exit";
     private static final String REQUEST_DELIMITER = ";";
@@ -25,28 +32,27 @@ public class CalculatorServer {
                     + "Type \"exit\" to finish. "
                     + "Use a dot for decimal numbers.";
 
-    private static final Logger logger = LoggerFactory.getLogger(CalculatorServer.class);
+    private static final Logger logger =
+            LoggerFactory.getLogger(CalculatorServer.class);
 
     public static void main(String[] args) {
-        try (ServerSocket serverSocket = new ServerSocket(SERVER_PORT)) {
-            logger.info("{}Started on port {}.", SERVER_LOG_PREFIX, SERVER_PORT);
-
+        try (ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
+             ExecutorService threadPool = createClientHandlerThreadPool()) {
+            logger.info("{}Started on port {}.",
+                    SERVER_LOG_PREFIX, SERVER_PORT);
             Calculator calculator = new Calculator();
 
             while (true) {
-                Socket clientSocket = serverSocket.accept();
-
-                try (clientSocket) {
-                    logger.info(
-                            "{}Client connected: {}",
-                            SERVER_LOG_PREFIX,
-                            clientSocket.getRemoteSocketAddress()
+                try {
+                    Socket clientSocket = serverSocket.accept();
+                    submitClientHandlingTask(
+                            threadPool,
+                            clientSocket,
+                            calculator
                     );
-
-                    handleClient(clientSocket, calculator);
                 } catch (IOException e) {
                     logger.error(
-                            "{}Client communication error: {}",
+                            "{}Failed to accept client connection: {}",
                             SERVER_LOG_PREFIX,
                             e.getMessage(),
                             e
@@ -168,5 +174,60 @@ public class CalculatorServer {
         bufferedWriter.write(message);
         bufferedWriter.newLine();
         bufferedWriter.flush();
+    }
+
+    private static ExecutorService createClientHandlerThreadPool() {
+        return new ThreadPoolExecutor(
+                CLIENT_HANDLER_THREADS,
+                CLIENT_HANDLER_THREADS,
+                0L,
+                TimeUnit.MILLISECONDS,
+                new ArrayBlockingQueue<>(CLIENT_TASK_QUEUE_CAPACITY),
+                new ThreadPoolExecutor.AbortPolicy()
+        );
+    }
+
+    private static void submitClientHandlingTask(
+            ExecutorService threadPool,
+            Socket clientSocket,
+            Calculator calculator
+    ) {
+        try {
+            threadPool.submit(() -> {
+                try (Socket socket = clientSocket) {
+                    logger.info(
+                            "{}Client connected: {}",
+                            SERVER_LOG_PREFIX,
+                            socket.getRemoteSocketAddress()
+                    );
+                    handleClient(socket, calculator);
+                } catch (IOException e) {
+                    logger.error(
+                            "{}Client communication error: {}",
+                            SERVER_LOG_PREFIX,
+                            e.getMessage(),
+                            e
+                    );
+                }
+            });
+        } catch (RejectedExecutionException e) {
+            logger.error(
+                    "{}Client task queue is full. Connection rejected: {}",
+                    SERVER_LOG_PREFIX,
+                    clientSocket.getRemoteSocketAddress(),
+                    e
+            );
+
+            try {
+                clientSocket.close();
+            } catch (IOException closeException) {
+                logger.error(
+                        "{}Failed to close rejected client socket: {}",
+                        SERVER_LOG_PREFIX,
+                        closeException.getMessage(),
+                        closeException
+                );
+            }
+        }
     }
 }
